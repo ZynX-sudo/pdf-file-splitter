@@ -1,0 +1,53 @@
+name: Build Windows Executable # Nama workflow yang akan muncul di tab Actions
+
+on:
+  push:
+    branches:
+      - main # Workflow akan berjalan setiap kali ada push ke branch 'main'
+  workflow_dispatch: # Ini memungkinkan Anda menjalankan workflow secara manual dari GitHub UI
+
+jobs:
+  build:
+    runs-on: windows-latest # Menggunakan mesin virtual Windows terbaru dari GitHub
+
+    steps:
+    - name: Checkout Code # Langkah 1: Mengambil kode proyek Anda
+      uses: actions/checkout@v4
+
+    - name: Set up Python # Langkah 2: Mengatur versi Python yang akan digunakan
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.9' # Anda bisa ganti ke versi Python yang Anda gunakan (misal: '3.10', '3.8')
+
+    - name: Install dependencies # Langkah 3: Menginstal semua library yang dibutuhkan
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt # Menginstal dari file requirements.txt Anda
+        pip install pyinstaller # Memastikan pyinstaller terinstal
+
+    - name: Build with PyInstaller # Langkah 4: Menjalankan proses kompilasi PyInstaller
+      run: |
+        # GANTI 'src/main_app.py' dengan path/nama file utama aplikasi Python Anda
+        # GANTI 'src/ikon_aplikasi.ico' dengan path/nama file ikon Anda (jika ada)
+        pyinstaller src/PDF File Splitter gen2.py --onefile --noconsole --icon=src/splitter.ico
+
+    - name: Upload executable as Artifact # Langkah 5: Mengunggah file .exe sebagai "Artifact"
+      uses: actions/upload-artifact@v4
+      with:
+        name: aplikasi-pyqt6-windows-exe # Nama untuk file yang akan Anda unduh
+        path: dist/main_app.exe # Path ke file .exe yang dihasilkan oleh PyInstaller
+
+    - name: Create GitHub Release # Langkah 6: Membuat Rilis di GitHub (Opsional, tapi disarankan)
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      # Langkah ini HANYA akan berjalan jika Anda mendorong sebuah "tag" ke GitHub
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        tag_name: ${{ github.ref_name }} # Mengambil nama tag (misal: v1.0.0)
+        name: Rilis Aplikasi ${{ github.ref_name }} # Judul rilis
+        body: | # Deskripsi rilis
+          Versi terbaru aplikasi PyQt6 Anda untuk Windows.
+          Silakan unduh file executable di bawah.
+        draft: false # Bukan rilis draft
+        prerelease: false # Bukan rilis pratinjau
+        files: dist/main_app.exe # Melampirkan file .exe ke rilis ini
