@@ -95,7 +95,7 @@ class PdfSplitterThread(QThread):
                 try:
                     file_size_mb = file_size / (1024 * 1024)
                     self._log(f"Menyalin '{os.path.basename(file_path)}' ({file_size_mb:.2f} MB) ke '{os.path.basename(current_folder_path)}'")
-                    shutil.copy2(file_path, dest_file_path)
+                    shutil.move(file_path, dest_file_path)
                     current_folder_size += file_size
                     folder_sizes[current_folder_path] += file_size
                     self.status_signal.emit(f"Menyalin '{os.path.basename(file_path)}' ({current_folder_size / (1024 * 1024):.2f} MB)")
