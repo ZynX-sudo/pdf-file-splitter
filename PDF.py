@@ -68,7 +68,7 @@ class PdfSplitterThread(QThread):
 
             current_folder_index = 1
             current_folder_size = 0
-            current_folder_path = os.path.join(self.destination_folder, f"output_{current_folder_index:03d}")
+            current_folder_path = os.path.join(self.destination_folder, f"Folder{current_folder_index:1d}")
             os.makedirs(current_folder_path, exist_ok=True)
             folder_sizes[current_folder_path] = 0
             self._log(f"Membuat folder output awal: {os.path.basename(current_folder_path)}")
@@ -85,7 +85,7 @@ class PdfSplitterThread(QThread):
 
                     current_folder_index += 1
                     current_folder_size = 0
-                    current_folder_path = os.path.join(self.destination_folder, f"output_{current_folder_index:03d}")
+                    current_folder_path = os.path.join(self.destination_folder, f"Folder{current_folder_index:1d}")
                     os.makedirs(current_folder_path, exist_ok=True)
                     folder_sizes[current_folder_path] = 0
                     self._log(f"Membuat folder output baru: {os.path.basename(current_folder_path)}")
