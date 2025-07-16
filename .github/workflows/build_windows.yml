@@ -36,7 +36,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: aplikasi-pyqt6-windows-exe # Nama untuk file yang akan Anda unduh
-        path: dist/main_app.exe # Path ke file .exe yang dihasilkan oleh PyInstaller
+        path: D:\a\pdf-file-splitter\pdf-file-splitter\dist\PDF.exe # Path ke file .exe yang dihasilkan oleh PyInstaller
 
     - name: Create GitHub Release # Langkah 6: Membuat Rilis di GitHub (Opsional, tapi disarankan)
       id: create_release
