@@ -29,7 +29,7 @@ jobs:
       run: |
         # GANTI 'src/main_app.py' dengan path/nama file utama aplikasi Python Anda
         # GANTI 'src/ikon_aplikasi.ico' dengan path/nama file ikon Anda (jika ada)
-        pyinstaller "src/PDF File Splitter gen2.py" --onefile --noconsole --icon="src/splitter.ico"
+        pyinstaller "src/pdf_file_splitter.py" --onefile --noconsole --icon="src/splitter.ico"
 
     - name: Upload executable as Artifact # Langkah 5: Mengunggah file .exe sebagai "Artifact"
       uses: actions/upload-artifact@v4
