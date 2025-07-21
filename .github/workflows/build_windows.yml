@@ -30,13 +30,13 @@ jobs:
       run: |
         # GANTI 'src/main_app.py' dengan path/nama file utama aplikasi Python Anda
         # GANTI 'src/ikon_aplikasi.ico' dengan path/nama file ikon Anda (jika ada)
-        pyinstaller PDF.py --noconsole --icon=splitter.ico
+        pyinstaller PDF.py --onefile --noconsole --icon=splitter.ico
 
     - name: Upload executable as Artifact # Langkah 5: Mengunggah file .exe sebagai "Artifact"
       uses: actions/upload-artifact@v4
       with:
         name: aplikasi-pyqt6-windows-exe # Nama untuk file yang akan Anda unduh
-        path: D:\a\pdf-file-splitter\pdf-file-splitter\dist\PDF # Path ke file .exe yang dihasilkan oleh PyInstaller
+        path: D:\a\pdf-file-splitter\pdf-file-splitter\dist\PDF.exe # Path ke file .exe yang dihasilkan oleh PyInstaller
 
     - name: Create GitHub Release # Langkah 6: Membuat Rilis di GitHub (Opsional, tapi disarankan)
       id: create_release
