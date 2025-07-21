@@ -51,4 +51,4 @@ jobs:
           Silakan unduh file executable di bawah.
         draft: false # Bukan rilis draft
         prerelease: false # Bukan rilis pratinjau
-        files: D:\a\pdf-file-splitter\pdf-file-splitter\dist\PDF # Melampirkan file .exe ke rilis ini
+        files: D:\a\pdf-file-splitter\pdf-file-splitter\dist\PDF.exe # Melampirkan file .exe ke rilis ini
